@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.views.generic import (TemplateView,ListView,DetailView,CreateView,UpdateView
+from django.views.generic import (TemplateView,ListView,DetailView,CreateView,UpdateView,
                                     DeleteView)
 
 # Create your views here.
@@ -50,7 +50,7 @@ class DraftListView(LoginRequiredMixin,ListView):
     #if it is the list of drafts then its publish date must be published_date__isnull
     #thats what we are checking with below queryset
     def get_queryset(self):
-        return Post.object.filter(published_date__isnull=True).order_by('create_date')
+        return Post.objects.filter(published_date__isnull=True).order_by('create_date')
 
 ######################################
 ########### Comment Views ############
@@ -75,7 +75,7 @@ def add_comment_to_post(request,pk):
             return redirect('post_detail',pk=post.pk)
     else:
         form = CommentForm()
-    return render(request,'blog/comment_form.html'{'form':form})
+    return render(request,'blog/comment_form.html',{'form':form})
 
 
 @login_required
