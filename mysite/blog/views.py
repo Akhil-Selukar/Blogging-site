@@ -59,13 +59,13 @@ class DraftListView(LoginRequiredMixin,ListView):
 @login_required
 def post_publish(request,pk):
     post = get_object_or_404(Post,pk=pk)
-    post.publish
+    post.publish()
     return redirect('post_detail',pk=pk)
 
 
 @login_required
 def add_comment_to_post(request,pk):
-    post = get_object_or_404(Post,pk)
+    post = get_object_or_404(Post,pk=pk)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -92,4 +92,4 @@ def comment_remove(request,pk):
                                # post.pk i.e. promary key of the associated post
                                # hence we stored it in the veriable first and then deleted the comment.
     comment.delete()
-    return redirect('post_detail',pk='post_pk')
+    return redirect('post_detail',pk=post_pk)

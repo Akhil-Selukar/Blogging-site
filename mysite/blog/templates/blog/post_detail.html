@@ -9,7 +9,7 @@
     <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
   {% endif %}
 
-  <p class='postcontent'>{{ post.title|safe|linebreaks }}</p> <!-- what safe does is if we add any html tag,
+  <p class='postcontent'>{{ post.text|safe|linebreaks }}</p> <!-- what safe does is if we add any html tag,
      like <strong></strong> to some text using medium class it will convert that
       into code and apply it. linebreakbr add <br></br> whenever there is linebreak -->
 
